@@ -35,7 +35,13 @@ class Signup extends React.Component {
       password: "required|string|min:4|confirmed",
     };
 
-    validateAll(data, rules)
+    const messages = {
+      required: "The {{field}} is required",
+      "email.email": "please enter a valid email-id",
+      "password.confirmed": "The password confirmation did not match",
+    };
+
+    validateAll(data, rules, messages)
       .then(() => {
         console.log("SUCCESS");
       })
@@ -75,7 +81,11 @@ class Signup extends React.Component {
                 className="form-control"
                 placeholder="Username"
               />
-              <small className="text-danger">{this.state.errors["name"]}</small>
+              {this.state.errors["name"] && (
+                <small className="text-danger">
+                  {this.state.errors["name"]}
+                </small>
+              )}
             </div>
             <div className="form-group">
               <input
@@ -85,9 +95,11 @@ class Signup extends React.Component {
                 className="form-control"
                 placeholder="Email address"
               />
-              <small className="text-danger">
-                {this.state.errors["email"]}
-              </small>
+              {this.state.errors["email"] && (
+                <small className="text-danger">
+                  {this.state.errors["email"]}
+                </small>
+              )}
             </div>
             <div className="form-group">
               <input
@@ -97,9 +109,11 @@ class Signup extends React.Component {
                 className="form-control"
                 placeholder="Password"
               />
-              <small className="text-danger">
-                {this.state.errors["password"]}
-              </small>
+              {this.state.errors["password"] && (
+                <small className="text-danger">
+                  {this.state.errors["password"]}
+                </small>
+              )}
             </div>
             <div className="form-group">
               <input
